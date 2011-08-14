@@ -2,6 +2,7 @@ package com.tlam.miam;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,7 +24,7 @@ public class MiamMiam extends ListActivity
 
         ListView lv = getListView();
         lv.setTextFilterEnabled(true);
-
+/*
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                     int position, long id) {
@@ -31,9 +32,12 @@ public class MiamMiam extends ListActivity
                     Toast.LENGTH_SHORT).show();
             }
 
-        });
+        });*/
+    }
 
-
-        //setContentView(R.layout.main);
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        Intent i = new Intent(this, FoodItem.class);
+        startActivityForResult(i, 1);
     }
 }
