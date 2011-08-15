@@ -48,7 +48,7 @@ public class MiamMiam extends ListActivity
         startManagingCursor(cursor);
 
         String[] from = new String[] {DBAdapter.CATEGORY_NAME};
-        int[] to = new int[] { R.id.category };
+        int[] to = new int[] { R.id.list_item };
         SimpleCursorAdapter categories = new SimpleCursorAdapter(this,
             R.layout.list_item, cursor, from, to);
         setListAdapter(categories);
