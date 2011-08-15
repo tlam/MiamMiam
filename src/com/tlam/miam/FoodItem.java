@@ -15,7 +15,7 @@ public class FoodItem extends ListActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.food_item);
+        //setContentView(R.layout.food_item);
 
         Bundle extras = getIntent().getExtras();
         long categoryId = extras.getLong(CATEGORY_ID);
