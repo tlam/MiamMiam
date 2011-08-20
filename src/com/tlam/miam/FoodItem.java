@@ -33,17 +33,12 @@ public class FoodItem extends ListActivity {
         db.open();
         Cursor c = db.getFoodItems(categoryId);
 
-        String[] foodItems = new String[c.getCount()];
-
         c.moveToFirst();
-        int i = 0;
         while (!c.isAfterLast()) {
             String foodName = c.getString(c.getColumnIndexOrThrow(DBAdapter.FOOD_ITEM_NAME));
             String foodDescription = c.getString(c.getColumnIndexOrThrow(DBAdapter.FOOD_ITEM_DESCRIPTION));
-            foodItems[i] = foodName + " - " + foodDescription;
             Food food = new Food(foodName, foodDescription, categoryId);
             this.m_food.add(food);
-            i++;
             c.moveToNext();
         }
 
@@ -51,8 +46,6 @@ public class FoodItem extends ListActivity {
 
         this.m_adapter = new FoodAdapter(this, R.layout.food_item, this.m_food);
         setListAdapter(this.m_adapter);
-
-        //setListAdapter(new ArrayAdapter<String>(this, R.layout.food_item, foodItems));
     }
 
     private class FoodAdapter extends ArrayAdapter<Food> {
@@ -66,7 +59,6 @@ public class FoodItem extends ListActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            Log.i("FOODADAPTER", "" + position);
             View v = convertView;
 
             if (v == null) {
@@ -76,9 +68,15 @@ public class FoodItem extends ListActivity {
 
             Food food = items.get(position);
             if (food != null) {
-                TextView foodName = (TextView)v.findViewById(R.id.food);
+                TextView foodName = (TextView)v.findViewById(R.id.food_name);
                 if (foodName != null) {
                     foodName.setText(food.getName());
+                }
+
+                TextView foodDescription = (TextView)v.findViewById(R.id.food_description);
+                if (foodDescription != null) {
+                    Log.i("FOODADAPTER", "" + food.getDescription());
+                    foodDescription.setText(food.getDescription());
                 }
             }
 
