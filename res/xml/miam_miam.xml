@@ -6,10 +6,17 @@
     <food name="Spaghetti" description="Long piece" slug="spaghetti"></food>
   </category>
   <category name="Mexican">
-    <food name="Quesadilla" description="Something cheesy" slug="quesadilla"></food>
+    <food name="Burrito" description="Wheat flour tortilla wrapped or folded around a filling" slug="burrito"></food>
+    <food name="Enchilada" description="A corn or flour tortilla rolled around a filling and covered with a chili peper sauce" slug="enchilada"></food>
+    <food name="Fajita" description="Any grilled meat served on a flour or corn tortilla" slug="fajita"></food>
+    <food name="Quesadilla" description="Flour or corn tortilla filled with a savoury mixture containing cheese and other ingredients" slug="quesadilla"></food>
     <food name="Taco" description="Crunchy" slug="taco"></food>
+    <food name="Tamale" description="Made of masa" slug="tamale"></food>
+    <food name="Tortilla" description="A Mexican roti" slug="tortilla"></food>
   </category>
   <category name="Sushi">
-    <food name="Maki" description="Rolling" slug="maki"></food>
+    <food name="Makizushi" description="Roll generally wrapped in nori(seaweed) and usually cut in 6 or 8 pieces" slug="makizushi"></food>
+    <food name="Nigirizushi" description="Fish drapped over an oblong mound of sushi rice" slug="nigirizushi"></food>
+    <food name="Temaki" description="Large cone-shaped piece of nori on the outside and the ingredients spilling out the wide end" slug="temaki"></food>
   </category>
 </miam>

@@ -83,7 +83,7 @@
     </path>
     <taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask" classpathref="pmd.classpath"/>
     <target name="pmd">
-        <pmd rulesetfiles="android,basic,braces,imports,naming,optimizations,unusedcode">
+        <pmd rulesetfiles="android,basic,braces,imports,migrating,strings,typeresolution,unusedcode">
             <formatter type="html" toFile="pmd_report.html" toConsole="true"/>
             <fileset dir="src/">
                 <include name="**/*.java"/>
