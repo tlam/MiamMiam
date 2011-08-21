@@ -1,6 +1,5 @@
 package com.tlam.miam;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.ListActivity;
@@ -17,7 +16,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.xmlpull.v1.XmlPullParser;
 
 public class FoodItem extends ListActivity {
 

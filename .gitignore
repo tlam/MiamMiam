@@ -1,5 +1,6 @@
 *.class
 *.swp
 local.properties
+pmd_report.html
 bin
 gen

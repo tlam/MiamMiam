@@ -25,6 +25,7 @@ public class DBAdapter {
     public static final String[] FOOD_ITEM_COLS = new String[]
         {FOOD_ITEM_ID, FOOD_ITEM_NAME, FOOD_ITEM_DESCRIPTION, FOOD_ITEM_SLUG, FOOD_ITEM_CATEGORY};
 
+    private static final String TAG = "DBAdapter";
     private static final String DB_NAME = "miam_miam.db";
     private static final String CATEGORY_TABLE = "category";
     private static final String FOOD_ITEM_TABLE = "food_item";
@@ -94,7 +95,6 @@ public class DBAdapter {
      */
     public void loadInitialData(XmlPullParser data) {
         XmlPullParser parser = data;
-        StringBuffer sb = new StringBuffer();
         try {
             int eventType = parser.getEventType();
             long categoryId = 0;
@@ -102,7 +102,6 @@ public class DBAdapter {
                 String name = parser.getName();
                 if (name != null && eventType == XmlPullParser.START_TAG) {
                     if (name.equals("category")) {
-                        int size = parser.getAttributeCount();
                         String categoryName = parser.getAttributeValue(0);
                         categoryId = createCategory(categoryName);
                     }
@@ -116,7 +115,7 @@ public class DBAdapter {
                 eventType = parser.next();
             }
         } catch (Exception e) {
-
+            Log.e(TAG, "Problem parsing the data file", e);
         }
     }
 
