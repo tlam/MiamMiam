@@ -1,15 +1,15 @@
 <miam>
   <category name="Dim Sum">
-    <food name="Siu Mai" description="With pork and shrimp"></food>
+    <food name="Shumai" description="With pork and shrimp" slug="shumai"></food>
   </category>
   <category name="Pasta">
-    <food name="Spaghetti" description="Long piece"></food>
+    <food name="Spaghetti" description="Long piece" slug="spaghetti"></food>
   </category>
   <category name="Mexican">
-    <food name="Quesadilla" description="Something cheesy"></food>
-    <food name="Taco" description="Crunchy"></food>
+    <food name="Quesadilla" description="Something cheesy" slug="quesadilla"></food>
+    <food name="Taco" description="Crunchy" slug="taco"></food>
   </category>
   <category name="Sushi">
-    <food name="Maki" description="Rolling"></food>
+    <food name="Maki" description="Rolling" slug="maki"></food>
   </category>
 </miam>

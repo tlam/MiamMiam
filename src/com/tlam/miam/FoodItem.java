@@ -1,12 +1,16 @@
 package com.tlam.miam;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +22,7 @@ import org.xmlpull.v1.XmlPullParser;
 public class FoodItem extends ListActivity {
 
     public static final String CATEGORY_ID = "category_id";
+    private static final String TAG = "FoodItem";
     private ArrayList<Food> m_food = null;
     private FoodAdapter m_adapter;
 
@@ -37,12 +42,15 @@ public class FoodItem extends ListActivity {
         while (!c.isAfterLast()) {
             String foodName = c.getString(c.getColumnIndexOrThrow(DBAdapter.FOOD_ITEM_NAME));
             String foodDescription = c.getString(c.getColumnIndexOrThrow(DBAdapter.FOOD_ITEM_DESCRIPTION));
-            Food food = new Food(foodName, foodDescription, categoryId);
+            String foodSlug = c.getString(c.getColumnIndexOrThrow(DBAdapter.FOOD_ITEM_SLUG));
+            Food food = new Food(foodName, foodDescription, foodSlug, categoryId);
             this.m_food.add(food);
             c.moveToNext();
         }
 
         c.close();
+
+        Log.i("IMAGETEST", this.getFilesDir().getPath());
 
         this.m_adapter = new FoodAdapter(this, R.layout.food_item, this.m_food);
         setListAdapter(this.m_adapter);
@@ -75,8 +83,16 @@ public class FoodItem extends ListActivity {
 
                 TextView foodDescription = (TextView)v.findViewById(R.id.food_description);
                 if (foodDescription != null) {
-                    Log.i("FOODADAPTER", "" + food.getDescription());
                     foodDescription.setText(food.getDescription());
+                }
+
+                try {
+                    ImageView foodIcon = (ImageView)v.findViewById(R.id.food_icon);
+                    int iconId = getResources().getIdentifier(food.getSlug(), "drawable", getPackageName());
+                    Drawable d = getResources().getDrawable(iconId);
+                    foodIcon.setImageDrawable(d);
+                } catch (Resources.NotFoundException e) {
+                    Log.e(TAG, "Food icon not found for " + food.getName(), e);
                 }
             }
 

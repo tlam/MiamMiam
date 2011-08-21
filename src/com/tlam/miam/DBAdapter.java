@@ -20,9 +20,10 @@ public class DBAdapter {
     public static final String FOOD_ITEM_ID = "_id";
     public static final String FOOD_ITEM_NAME = "name";
     public static final String FOOD_ITEM_DESCRIPTION = "description";
+    public static final String FOOD_ITEM_SLUG = "slug";
     public static final String FOOD_ITEM_CATEGORY = "category_id";
     public static final String[] FOOD_ITEM_COLS = new String[]
-        {FOOD_ITEM_ID, FOOD_ITEM_NAME, FOOD_ITEM_DESCRIPTION, FOOD_ITEM_CATEGORY};
+        {FOOD_ITEM_ID, FOOD_ITEM_NAME, FOOD_ITEM_DESCRIPTION, FOOD_ITEM_SLUG, FOOD_ITEM_CATEGORY};
 
     private static final String DB_NAME = "miam_miam.db";
     private static final String CATEGORY_TABLE = "category";
@@ -55,10 +56,11 @@ public class DBAdapter {
         return db.insert(CATEGORY_TABLE, null, values);
     }
 
-    public long createFoodItem(String name, String description, long categoryId) {
+    public long createFoodItem(String name, String description, String slug, long categoryId) {
         ContentValues values = new ContentValues();
         values.put(FOOD_ITEM_NAME, name);
         values.put(FOOD_ITEM_DESCRIPTION, description);
+        values.put(FOOD_ITEM_SLUG, slug);
         values.put(FOOD_ITEM_CATEGORY, categoryId);
 
         return db.insert(FOOD_ITEM_TABLE, null, values);
@@ -107,7 +109,8 @@ public class DBAdapter {
                     else if (name.equals("food")) {
                         String foodName = parser.getAttributeValue(0);
                         String foodDescription = parser.getAttributeValue(1);
-                        createFoodItem(foodName, foodDescription, categoryId);
+                        String foodSlug = parser.getAttributeValue(2);
+                        createFoodItem(foodName, foodDescription, foodSlug, categoryId);
                     }
                 }
                 eventType = parser.next();
@@ -127,6 +130,7 @@ public class DBAdapter {
             + FOOD_ITEM_ID + " INTEGER PRIMARY KEY, "
             + FOOD_ITEM_NAME + " TEXT NOT NULL, "
             + FOOD_ITEM_DESCRIPTION + " TEXT NOT NULL, "
+            + FOOD_ITEM_SLUG + " TEXT NOT NULL, "
             + FOOD_ITEM_CATEGORY + " INTEGER NOT NULL);";
 
         public DBHelper(Context context) {
