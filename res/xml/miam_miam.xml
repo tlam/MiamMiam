@@ -1,9 +1,23 @@
 <miam>
   <category name="Dim Sum">
+    <food name="Cheong Fan" description="Wide rice noodles that are steamed and rolled, usually filled with meat or shrimps" slug="cheong_fan"></food>
+    <food name="Hargao" description="Shrimp dumpling" slug="hargao"></food>
+    <food name="Law Bok Gow" description="Turnip cake" slug="law_bok_gow"></food>
     <food name="Shumai" description="With pork and shrimp" slug="shumai"></food>
+    <food name="Wu Gok" description="Taro dumpling" slug="wu_gok"></food>
   </category>
   <category name="Pasta">
-    <food name="Spaghetti" description="Long piece" slug="spaghetti"></food>
+    <food name="Conchigile" description="Seashell" slug="conchigile"></food>
+    <food name="Farfalle" description="Bow-tie pasta" slug="farfalle"></food>
+    <food name="Fettuccine" description="Little ribbons" slug="fettuccine"></food>
+    <food name="Fusilli" description="Long, thick, corkscrew shaped pasta" slug="fusilli"></food>
+    <food name="Gnocchi" description="Think, soft dumplings and often made with flour and potatoes" slug="gnocchi"></food>
+    <food name="Linguine" description="Flattened spaghetti, little tongues" slug="linguine"></food>
+    <food name="Penne" description="Medium length tubes with ridges, cut diagonally at both ends" slug="penne"></food>
+    <food name="Rigatoni" description="Large and slightly curved tube" slug="rigatoni"></food>
+    <food name="Rotini" description="2-edged spiral, tightly wound" slug="rotini"></food>
+    <food name="Spaghetti" description="Round-rod pasta" slug="spaghetti"></food>
+    <food name="Tortellini" description="Ring-shaped pasta stuffed with a mix of meat or cheese" slug="tortellini"></food>
   </category>
   <category name="Mexican">
     <food name="Burrito" description="Wheat flour tortilla wrapped or folded around a filling" slug="burrito"></food>
