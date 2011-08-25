@@ -81,6 +81,11 @@ public class DBAdapter {
         return c;
     }
 
+    public Cursor getFoodItem(long foodId) {
+        return db.query(FOOD_ITEM_TABLE, FOOD_ITEM_COLS, FOOD_ITEM_ID + "=" + foodId, null,
+            null, null, null, null);
+    }
+
     public Cursor getFoodItems(long categoryId) {
         return db.query(FOOD_ITEM_TABLE, FOOD_ITEM_COLS, FOOD_ITEM_CATEGORY + "=" + categoryId, null,
             null, null, null, null);
@@ -144,9 +149,11 @@ public class DBAdapter {
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            /*
             db.execSQL("DROP TABLE IF EXISTS " + CATEGORY_TABLE);
             db.execSQL("DROP TABLE IF EXISTS " + FOOD_ITEM_TABLE);
             onCreate(db);
+            */
         }
     }
 }

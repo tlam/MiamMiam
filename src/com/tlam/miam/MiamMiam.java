@@ -4,6 +4,7 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -34,12 +35,9 @@ public class MiamMiam extends ListActivity
     }
 
     private void fillData() {
-        /*
         if (db.count() == 0) {
-            loadInitialData();
+            db.loadInitialData(getResources().getXml(R.xml.miam_miam));
         }
-        */
-        db.loadInitialData(getResources().getXml(R.xml.miam_miam));
 
         cursor = db.all();
         startManagingCursor(cursor);

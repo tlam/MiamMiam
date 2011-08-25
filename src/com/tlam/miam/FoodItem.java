@@ -5,17 +5,19 @@ import java.util.List;
 
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.ListView;
 
 
 public class FoodItem extends ListActivity {
@@ -39,20 +41,28 @@ public class FoodItem extends ListActivity {
 
         c.moveToFirst();
         while (!c.isAfterLast()) {
+            long foodId = c.getLong(c.getColumnIndexOrThrow(DBAdapter.FOOD_ITEM_ID));
             String foodName = c.getString(c.getColumnIndexOrThrow(DBAdapter.FOOD_ITEM_NAME));
             String foodDescription = c.getString(c.getColumnIndexOrThrow(DBAdapter.FOOD_ITEM_DESCRIPTION));
             String foodSlug = c.getString(c.getColumnIndexOrThrow(DBAdapter.FOOD_ITEM_SLUG));
-            Food food = new Food(foodName, foodDescription, foodSlug, categoryId);
+            Food food = new Food(foodId, foodName, foodDescription, foodSlug, categoryId);
             this.m_food.add(food);
             c.moveToNext();
         }
 
         c.close();
-
-        Log.i("IMAGETEST", this.getFilesDir().getPath());
+        db.close();
 
         this.m_adapter = new FoodAdapter(this, R.layout.food_item, this.m_food);
         setListAdapter(this.m_adapter);
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        Intent i = new Intent(this, FoodDetail.class);
+        i.putExtra(DBAdapter.FOOD_ITEM_ID, this.m_food.get(position).getId());
+        startActivityForResult(i, 1);
     }
 
     private class FoodAdapter extends ArrayAdapter<Food> {
