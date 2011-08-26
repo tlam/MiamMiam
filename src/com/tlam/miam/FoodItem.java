@@ -16,13 +16,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
 public class FoodItem extends ListActivity {
 
+    public static final String CATEGORY = "category";
     public static final String CATEGORY_ID = "category_id";
+    public static final String FOOD = "food";
     private static final String TAG = "FoodItem";
     private List<Food> m_food = null;
     private FoodAdapter m_adapter;
@@ -33,7 +35,9 @@ public class FoodItem extends ListActivity {
 
         this.m_food = new ArrayList<Food>();
         Bundle extras = getIntent().getExtras();
+        String categoryName = extras.getString(CATEGORY);
         long categoryId = extras.getLong(CATEGORY_ID);
+        setTitle(categoryName);
 
         DBAdapter db = new DBAdapter(this);
         db.open();
@@ -60,7 +64,9 @@ public class FoodItem extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
+        TextView foodName = (TextView)v.findViewById(R.id.food_name);
         Intent i = new Intent(this, FoodDetail.class);
+        i.putExtra(FOOD, foodName.getText());
         i.putExtra(DBAdapter.FOOD_ITEM_ID, this.m_food.get(position).getId());
         startActivityForResult(i, 1);
     }

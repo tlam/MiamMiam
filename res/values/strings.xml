@@ -3,9 +3,5 @@
     <string name="app_name">MiamMiam</string>
     <string name="no_categories">No Categories</string>
     <string-array name="food_categories">
-        <item>Dim Sum</item>
-        <item>Pasta</item>
-        <item>Mexican</item>
-        <item>Sushi</item>
     </string-array>
 </resources>

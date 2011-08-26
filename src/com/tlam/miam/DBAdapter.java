@@ -68,7 +68,7 @@ public class DBAdapter {
 
     }
 
-    public Cursor all() {
+    public Cursor getCategories() {
         return db.query(CATEGORY_TABLE, CATEGORY_COLS, null, null, null, null, null);
     }
 

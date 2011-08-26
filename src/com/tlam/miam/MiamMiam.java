@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 
 public class MiamMiam extends ListActivity
@@ -29,7 +30,9 @@ public class MiamMiam extends ListActivity
 
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
+        TextView category = (TextView)v.findViewById(R.id.category_name);
         Intent i = new Intent(this, FoodItem.class);
+        i.putExtra(FoodItem.CATEGORY, category.getText());
         i.putExtra(FoodItem.CATEGORY_ID, id);
         startActivityForResult(i, 1);
     }
@@ -39,7 +42,7 @@ public class MiamMiam extends ListActivity
             db.loadInitialData(getResources().getXml(R.xml.miam_miam));
         }
 
-        cursor = db.all();
+        cursor = db.getCategories();
         startManagingCursor(cursor);
 
         String[] from = new String[] {DBAdapter.CATEGORY_NAME};
