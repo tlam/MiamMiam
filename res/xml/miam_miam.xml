@@ -1,5 +1,12 @@
 <miam>
+  <category name="Coffee">
+    <food name="Americano" description="Hot water to espresso" slug="americano"></food>
+    <food name="Cappuccino" description="Espresso, hot milk and steamed milk foam" slug="cappuccino"></food>
+    <food name="Espresso" description="Brewed by forcing a small amount of nearly boiling water under pressure through finely ground coffee" slug="espresso"></food>
+    <food name="Latte" description="Espresso and steamed milk" slug="latte"></food>
+  </category>
   <category name="Dim Sum">
+    <food name="Bau" description="Steamed bun usually filled with pork" slug="bau"></food>
     <food name="Cheong Fan" description="Wide rice noodles that are steamed and rolled, usually filled with meat or shrimps" slug="cheong_fan"></food>
     <food name="Hargao" description="Shrimp dumpling" slug="hargao"></food>
     <food name="Law Bok Gow" description="Turnip cake" slug="law_bok_gow"></food>

@@ -38,7 +38,7 @@ public class MiamMiam extends ListActivity
     }
 
     private void fillData() {
-        if (db.count() == 0) {
+        if (db.count() <= 0) {
             db.loadInitialData(getResources().getXml(R.xml.miam_miam));
         }
 

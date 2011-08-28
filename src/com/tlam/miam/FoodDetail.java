@@ -41,7 +41,9 @@ public class FoodDetail extends Activity {
             } catch (Resources.NotFoundException e) {
                 Log.e(TAG, "Food image not found for " + name, e);
             }
+            TextView foodName = (TextView)findViewById(R.id.food_detail_name);
             TextView foodDescription = (TextView)findViewById(R.id.food_detail_description);
+            foodName.setText(name);
             foodDescription.setText(description);
             c.moveToNext();
         }

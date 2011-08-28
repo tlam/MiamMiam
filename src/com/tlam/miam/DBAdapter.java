@@ -149,7 +149,7 @@ public class DBAdapter {
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            /*
+        /*
             db.execSQL("DROP TABLE IF EXISTS " + CATEGORY_TABLE);
             db.execSQL("DROP TABLE IF EXISTS " + FOOD_ITEM_TABLE);
             onCreate(db);
