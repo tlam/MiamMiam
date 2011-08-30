@@ -2,6 +2,4 @@
 <resources>
     <string name="app_name">MiamMiam</string>
     <string name="no_categories">No Categories</string>
-    <string-array name="food_categories">
-    </string-array>
 </resources>
