@@ -26,6 +26,7 @@ public class MiamMiam extends ListActivity
         db.open();
         db.flush();
         fillData();
+        //db.close();
     }
 
     protected void onListItemClick(ListView l, View v, int position, long id) {
