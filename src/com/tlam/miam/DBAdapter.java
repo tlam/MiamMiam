@@ -1,5 +1,7 @@
 package com.tlam.miam;
 
+import java.util.ArrayList;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -93,6 +95,25 @@ public class DBAdapter {
 
     public long count() {
         return DatabaseUtils.queryNumEntries(db, CATEGORY_TABLE);
+    }
+
+    public ArrayList<Food> getFood(long categoryId) {
+        ArrayList<Food> m_food = new ArrayList<Food>();
+        Cursor c = getFoodItems(categoryId);
+
+        c.moveToFirst();
+        while (!c.isAfterLast()) {
+            long foodId = c.getLong(c.getColumnIndexOrThrow(FOOD_ITEM_ID));
+            String foodName = c.getString(c.getColumnIndexOrThrow(FOOD_ITEM_NAME));
+            String foodDescription = c.getString(c.getColumnIndexOrThrow(FOOD_ITEM_DESCRIPTION));
+            String foodSlug = c.getString(c.getColumnIndexOrThrow(FOOD_ITEM_SLUG));
+            Food food = new Food(foodId, foodName, foodDescription, foodSlug, categoryId);
+            m_food.add(food);
+            c.moveToNext();
+        }
+
+        c.close();
+        return m_food;
     }
 
     /*

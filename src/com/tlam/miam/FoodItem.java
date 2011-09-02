@@ -24,9 +24,12 @@ public class FoodItem extends ListActivity {
 
     public static final String CATEGORY = "category";
     public static final String CATEGORY_ID = "category_id";
+    public static final String CATEGORY_FOOD = "category_food";
     private static final String TAG = "FoodItem";
-    private List<Food> m_food = null;
+    private ArrayList<Food> m_food = null;
     private FoodAdapter m_adapter;
+    private long categoryId;
+    private String categoryName;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,27 +37,12 @@ public class FoodItem extends ListActivity {
 
         this.m_food = new ArrayList<Food>();
         Bundle extras = getIntent().getExtras();
-        String categoryName = extras.getString(CATEGORY);
-        long categoryId = extras.getLong(CATEGORY_ID);
+        categoryName = extras.getString(CATEGORY);
+        categoryId = extras.getLong(CATEGORY_ID);
         setTitle(categoryName);
 
         DBAdapter db = new DBAdapter(this);
-        db.open();
-        Cursor c = db.getFoodItems(categoryId);
-
-        c.moveToFirst();
-        while (!c.isAfterLast()) {
-            long foodId = c.getLong(c.getColumnIndexOrThrow(DBAdapter.FOOD_ITEM_ID));
-            String foodName = c.getString(c.getColumnIndexOrThrow(DBAdapter.FOOD_ITEM_NAME));
-            String foodDescription = c.getString(c.getColumnIndexOrThrow(DBAdapter.FOOD_ITEM_DESCRIPTION));
-            String foodSlug = c.getString(c.getColumnIndexOrThrow(DBAdapter.FOOD_ITEM_SLUG));
-            Food food = new Food(foodId, foodName, foodDescription, foodSlug, categoryId);
-            this.m_food.add(food);
-            c.moveToNext();
-        }
-
-        c.close();
-        db.close();
+        this.m_food = db.getFood(categoryId);
 
         this.m_adapter = new FoodAdapter(this, R.layout.food_item, this.m_food);
         setListAdapter(this.m_adapter);
@@ -63,19 +51,15 @@ public class FoodItem extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        TextView foodName = (TextView)v.findViewById(R.id.food_name);
+        /*
         Intent i = new Intent(this, FoodDetail.class);
-        /*
-        int maxIndex = this.m_food.size() - 1;
-        int prev = Math.max(0, position - 1);
-        int next = Math.min(maxIndex, position + 1);
-        */
         i.putExtra(DBAdapter.FOOD_ITEM_ID, this.m_food.get(position).getId());
-        /*
-        i.putExtra(FoodDetail.PREV, this.m_food.get(prev).getId());
-        i.putExtra(FoodDetail.NEXT, this.m_food.get(next).getId());
-        i.putExtra(FoodDetail.MAX_INDEX, maxIndex);
+        startActivityForResult(i, 1);
         */
+        Intent i = new Intent(this, DetailGallery.class);
+        i.putExtra(DBAdapter.FOOD_ITEM_ID, this.m_food.get(position).getId());
+        i.putExtra(CATEGORY, categoryName);
+        i.putExtra(CATEGORY_ID, categoryId);
         startActivityForResult(i, 1);
     }
 
