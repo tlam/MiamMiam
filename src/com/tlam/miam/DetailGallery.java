@@ -29,7 +29,7 @@ public class DetailGallery extends Activity
 
         Bundle extras = getIntent().getExtras();
         category = extras.getString(FoodItem.CATEGORY);
-        setTitle(category);
+        int position = extras.getInt(FoodItem.FOOD_POSITION);
         long categoryId = extras.getLong(FoodItem.CATEGORY_ID);
         DBAdapter db = new DBAdapter(this);
         mFood = db.getFood(categoryId);
@@ -42,6 +42,8 @@ public class DetailGallery extends Activity
 
         Gallery gallery = (Gallery) findViewById(R.id.gallery);
         gallery.setAdapter(new ImageAdapter(this));
+        gallery.setSelection(position, true);
+        setTitle(category + " - " + mFood.get(position).getName());
 
         gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView parent, View v, int position, long id) {
@@ -80,8 +82,8 @@ public class DetailGallery extends Activity
             ImageView imageView = new ImageView(mContext);
 
             imageView.setImageResource(mImageIds.get(position));
-            imageView.setLayoutParams(new Gallery.LayoutParams(300, 300));
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            //imageView.setLayoutParams(new Gallery.LayoutParams(300, 300));
+            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
             imageView.setBackgroundResource(mGalleryItemBackground);
 
             return imageView;

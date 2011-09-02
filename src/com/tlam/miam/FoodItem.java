@@ -25,6 +25,7 @@ public class FoodItem extends ListActivity {
     public static final String CATEGORY = "category";
     public static final String CATEGORY_ID = "category_id";
     public static final String CATEGORY_FOOD = "category_food";
+    public static final String FOOD_POSITION = "food_position";
     private static final String TAG = "FoodItem";
     private ArrayList<Food> m_food = null;
     private FoodAdapter m_adapter;
@@ -60,6 +61,7 @@ public class FoodItem extends ListActivity {
         i.putExtra(DBAdapter.FOOD_ITEM_ID, this.m_food.get(position).getId());
         i.putExtra(CATEGORY, categoryName);
         i.putExtra(CATEGORY_ID, categoryId);
+        i.putExtra(FOOD_POSITION, position);
         startActivityForResult(i, 1);
     }
 
