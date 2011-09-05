@@ -12,7 +12,6 @@
             </intent-filter>
         </activity>
         <activity android:name="FoodItem"></activity>
-        <activity android:name="FoodDetail"></activity>
         <activity android:name="DetailGallery"></activity>
     </application>
 </manifest> 

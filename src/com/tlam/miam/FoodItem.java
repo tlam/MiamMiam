@@ -7,7 +7,6 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,7 +26,7 @@ public class FoodItem extends ListActivity {
     public static final String CATEGORY_FOOD = "category_food";
     public static final String FOOD_POSITION = "food_position";
     private static final String TAG = "FoodItem";
-    private ArrayList<Food> m_food = null;
+    private ArrayList<Food> mFood = null;
     private FoodAdapter m_adapter;
     private long categoryId;
     private String categoryName;
@@ -36,29 +35,24 @@ public class FoodItem extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.food_list);
 
-        this.m_food = new ArrayList<Food>();
+        mFood = new ArrayList<Food>();
         Bundle extras = getIntent().getExtras();
         categoryName = extras.getString(CATEGORY);
         categoryId = extras.getLong(CATEGORY_ID);
         setTitle(categoryName);
 
         DBAdapter db = new DBAdapter(this);
-        this.m_food = db.getFood(categoryId);
+        mFood = db.getFood(categoryId);
 
-        this.m_adapter = new FoodAdapter(this, R.layout.food_item, this.m_food);
+        this.m_adapter = new FoodAdapter(this, R.layout.food_item, mFood);
         setListAdapter(this.m_adapter);
     }
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        /*
-        Intent i = new Intent(this, FoodDetail.class);
-        i.putExtra(DBAdapter.FOOD_ITEM_ID, this.m_food.get(position).getId());
-        startActivityForResult(i, 1);
-        */
         Intent i = new Intent(this, DetailGallery.class);
-        i.putExtra(DBAdapter.FOOD_ITEM_ID, this.m_food.get(position).getId());
+        i.putExtra(DBAdapter.FOOD_ITEM_ID, mFood.get(position).getId());
         i.putExtra(CATEGORY, categoryName);
         i.putExtra(CATEGORY_ID, categoryId);
         i.putExtra(FOOD_POSITION, position);

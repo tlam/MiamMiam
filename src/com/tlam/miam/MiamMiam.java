@@ -23,8 +23,8 @@ public class MiamMiam extends ListActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.categories);
         db = new DBAdapter(this);
-        db.open();
-        db.flush();
+        //db.open();
+        //db.flush();
         fillData();
         //db.close();
     }
