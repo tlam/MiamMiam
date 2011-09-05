@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.res.TypedArray;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.Gallery;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -41,16 +43,32 @@ public class DetailGallery extends Activity
             mImageIds.add(getResources().getIdentifier(mFood.get(i).getSlug(), "drawable", getPackageName()));
         }
 
-        Gallery gallery = (Gallery) findViewById(R.id.gallery);
+        Gallery gallery = (Gallery)findViewById(R.id.gallery);
         gallery.setAdapter(new ImageAdapter(this));
         gallery.setSelection(position, true);
         setTitle(mCategory + " - " + mFood.get(position).getName());
+
 
         gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView parent, View v, int position, long id) {
                 String foodName = mFood.get(position).getName();
                 Toast.makeText(DetailGallery.this, foodName, Toast.LENGTH_SHORT).show();
                 setTitle(mCategory + " - " + foodName);
+            }
+        });
+
+        gallery.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView a, View v, int position, long id) {
+                String foodName = mFood.get(position).getName();
+                setTitle(mCategory + " - " + foodName);
+
+                //TextView galleryName = (TextView)findViewById(R.id.gallery_name);
+                //galleryName.setText(foodName);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView a) {
             }
         });
 
@@ -87,7 +105,7 @@ public class DetailGallery extends Activity
             imageView.setImageResource(mImageIds.get(position));
             //imageView.setLayoutParams(new Gallery.LayoutParams(300, 300));
             imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            imageView.setBackgroundResource(mGalleryItemBackground);
+            //imageView.setBackgroundResource(mGalleryItemBackground);
 
             return imageView;
         }
