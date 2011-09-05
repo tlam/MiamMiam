@@ -1,6 +1,7 @@
 package com.tlam.miam;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.res.TypedArray;
@@ -16,8 +17,8 @@ import android.widget.Toast;
 
 public class DetailGallery extends Activity
 {
-    private ArrayList<Food> mFood;
-    private ArrayList<Integer> mImageIds;
+    private List<Food> mFood;
+    private List<Integer> mImageIds;
     private String category;
 
     /** Called when the activity is first created. */
@@ -52,6 +53,8 @@ public class DetailGallery extends Activity
                 setTitle(category + " - " + foodName);
             }
         });
+
+        db.close();
     }
 
     public class ImageAdapter extends BaseAdapter {

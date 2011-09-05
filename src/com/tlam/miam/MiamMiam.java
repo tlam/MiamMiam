@@ -4,7 +4,6 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 public class MiamMiam extends ListActivity
 {
     private DBAdapter db;
-    private Cursor cursor;
 
     /** Called when the activity is first created. */
     @Override
@@ -23,10 +21,14 @@ public class MiamMiam extends ListActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.categories);
         db = new DBAdapter(this);
-        //db.open();
         //db.flush();
         fillData();
-        //db.close();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        db.close();
     }
 
     protected void onListItemClick(ListView l, View v, int position, long id) {
@@ -43,13 +45,13 @@ public class MiamMiam extends ListActivity
             db.loadInitialData(getResources().getXml(R.xml.miam_miam));
         }
 
-        cursor = db.getCategories();
-        startManagingCursor(cursor);
+        Cursor cursor = db.getCategories();
 
         String[] from = new String[] {DBAdapter.CATEGORY_NAME};
         int[] to = new int[] { R.id.category_name };
         SimpleCursorAdapter categories = new SimpleCursorAdapter(this,
             R.layout.category_item, cursor, from, to);
         setListAdapter(categories);
+        startManagingCursor(cursor);
     }
 }

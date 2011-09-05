@@ -1,6 +1,5 @@
 package com.tlam.miam;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ListActivity;
@@ -26,8 +25,8 @@ public class FoodItem extends ListActivity {
     public static final String CATEGORY_FOOD = "category_food";
     public static final String FOOD_POSITION = "food_position";
     private static final String TAG = "FoodItem";
-    private ArrayList<Food> mFood = null;
-    private FoodAdapter m_adapter;
+    private List<Food> mFood = null;
+    private FoodAdapter mAdapter;
     private long categoryId;
     private String categoryName;
 
@@ -35,7 +34,6 @@ public class FoodItem extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.food_list);
 
-        mFood = new ArrayList<Food>();
         Bundle extras = getIntent().getExtras();
         categoryName = extras.getString(CATEGORY);
         categoryId = extras.getLong(CATEGORY_ID);
@@ -44,8 +42,9 @@ public class FoodItem extends ListActivity {
         DBAdapter db = new DBAdapter(this);
         mFood = db.getFood(categoryId);
 
-        this.m_adapter = new FoodAdapter(this, R.layout.food_item, mFood);
-        setListAdapter(this.m_adapter);
+        this.mAdapter = new FoodAdapter(this, R.layout.food_item, mFood);
+        setListAdapter(this.mAdapter);
+        db.close();
     }
 
     @Override
