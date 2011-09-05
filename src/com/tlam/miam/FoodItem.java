@@ -1,7 +1,5 @@
 package com.tlam.miam;
 
-import java.util.List;
-
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.List;
+
 
 public class FoodItem extends ListActivity {
 
@@ -27,20 +27,20 @@ public class FoodItem extends ListActivity {
     private static final String TAG = "FoodItem";
     private List<Food> mFood = null;
     private FoodAdapter mAdapter;
-    private long categoryId;
-    private String categoryName;
+    private long mCategoryId;
+    private String mCategoryName;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.food_list);
 
         Bundle extras = getIntent().getExtras();
-        categoryName = extras.getString(CATEGORY);
-        categoryId = extras.getLong(CATEGORY_ID);
-        setTitle(categoryName);
+        mCategoryName = extras.getString(CATEGORY);
+        mCategoryId = extras.getLong(CATEGORY_ID);
+        setTitle(mCategoryName);
 
         DBAdapter db = new DBAdapter(this);
-        mFood = db.getFood(categoryId);
+        mFood = db.getFood(mCategoryId);
 
         this.mAdapter = new FoodAdapter(this, R.layout.food_item, mFood);
         setListAdapter(this.mAdapter);
@@ -52,8 +52,8 @@ public class FoodItem extends ListActivity {
         super.onListItemClick(l, v, position, id);
         Intent i = new Intent(this, DetailGallery.class);
         i.putExtra(DBAdapter.FOOD_ITEM_ID, mFood.get(position).getId());
-        i.putExtra(CATEGORY, categoryName);
-        i.putExtra(CATEGORY_ID, categoryId);
+        i.putExtra(CATEGORY, mCategoryName);
+        i.putExtra(CATEGORY_ID, mCategoryId);
         i.putExtra(FOOD_POSITION, position);
         startActivityForResult(i, 1);
     }

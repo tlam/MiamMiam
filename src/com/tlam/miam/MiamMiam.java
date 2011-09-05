@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 public class MiamMiam extends ListActivity
 {
-    private DBAdapter db;
+    private DBAdapter mDb;
 
     /** Called when the activity is first created. */
     @Override
@@ -20,15 +20,15 @@ public class MiamMiam extends ListActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.categories);
-        db = new DBAdapter(this);
-        //db.flush();
+        mDb = new DBAdapter(this);
+        //mDb.flush();
         fillData();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        db.close();
+        mDb.close();
     }
 
     protected void onListItemClick(ListView l, View v, int position, long id) {
@@ -41,11 +41,11 @@ public class MiamMiam extends ListActivity
     }
 
     private void fillData() {
-        if (db.count() <= 0) {
-            db.loadInitialData(getResources().getXml(R.xml.miam_miam));
+        if (mDb.count() <= 0) {
+            mDb.loadInitialData(getResources().getXml(R.xml.miam_miam));
         }
 
-        Cursor cursor = db.getCategories();
+        Cursor cursor = mDb.getCategories();
 
         String[] from = new String[] {DBAdapter.CATEGORY_NAME};
         int[] to = new int[] { R.id.category_name };

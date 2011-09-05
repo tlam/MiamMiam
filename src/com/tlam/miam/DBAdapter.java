@@ -1,8 +1,5 @@
 package com.tlam.miam;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -12,6 +9,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import org.xmlpull.v1.XmlPullParser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DBAdapter extends SQLiteOpenHelper {

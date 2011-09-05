@@ -1,8 +1,5 @@
 package com.tlam.miam;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.res.TypedArray;
 import android.content.Context;
@@ -15,11 +12,14 @@ import android.widget.ImageView;
 import android.widget.Gallery;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DetailGallery extends Activity
 {
     private List<Food> mFood;
     private List<Integer> mImageIds;
-    private String category;
+    private String mCategory;
 
     /** Called when the activity is first created. */
     @Override
@@ -29,7 +29,7 @@ public class DetailGallery extends Activity
         setContentView(R.layout.detail_gallery);
 
         Bundle extras = getIntent().getExtras();
-        category = extras.getString(FoodItem.CATEGORY);
+        mCategory = extras.getString(FoodItem.CATEGORY);
         int position = extras.getInt(FoodItem.FOOD_POSITION);
         long categoryId = extras.getLong(FoodItem.CATEGORY_ID);
         DBAdapter db = new DBAdapter(this);
@@ -44,13 +44,13 @@ public class DetailGallery extends Activity
         Gallery gallery = (Gallery) findViewById(R.id.gallery);
         gallery.setAdapter(new ImageAdapter(this));
         gallery.setSelection(position, true);
-        setTitle(category + " - " + mFood.get(position).getName());
+        setTitle(mCategory + " - " + mFood.get(position).getName());
 
         gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView parent, View v, int position, long id) {
                 String foodName = mFood.get(position).getName();
                 Toast.makeText(DetailGallery.this, foodName, Toast.LENGTH_SHORT).show();
-                setTitle(category + " - " + foodName);
+                setTitle(mCategory + " - " + foodName);
             }
         });
 
